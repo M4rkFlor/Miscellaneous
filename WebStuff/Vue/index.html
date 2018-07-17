@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- production version, optimized for size and speed -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+    <title></title>
+</head>
+
+<body>
+    <!-- message binding -->
+    <div id="app">
+        {{ message }}
+    </div>
+    <!-- on hover message binding -->
+    <div id="app-2">
+        <span v-bind:title="message">
+    Hover your mouse over me for a few seconds
+    to see my dynamically bound title!
+  </span>
+    </div>
+    <!-- Toggle elements with seen property -->
+    <div id="app-3">
+        <span v-if="seen">Now you see me</span>
+    </div>
+    <!-- For each Loop -->
+    <div id="app-4">
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+    <!-- User input Button onClick-->
+    <div id="app-5">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+    <!-- message binding live update onChange-->
+    <div id="app-6">
+  <p>{{ all3sameName }}</p>
+  <input v-model="all3sameName">
+</div>
+<!-- message binding live update onChange-->
+
+<div id="app-7">
+  <ol>
+    <!--
+      Now we provide each todo-item with the todo object
+      it's representing, so that its content can be dynamic.
+      We also need to provide each component with a "key",
+      which will be explained later.
+    -->
+    <todo-item
+      v-for="item in groceryList"
+      v-bind:todo="item"
+      v-bind:key="item.id">
+    </todo-item>
+  </ol>
+</div>
+
+
+
+
+
+
+
+</body>
+
+<script src="./index.js"></script>
+
+</html>

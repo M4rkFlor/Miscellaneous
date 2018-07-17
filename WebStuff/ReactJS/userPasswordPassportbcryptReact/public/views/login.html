@@ -1,0 +1,76 @@
+
+
+
+<!DOCTYPE html>
+<!--   -->
+<html>
+  <head>
+    <title>Ajax</title>
+    <meta charset="utf-8"/>
+
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  </head>
+  
+  <body>  
+    <div id="root"></div>
+
+
+<!-- Below is using jsx -->
+    <script type="text/babel">
+
+//Create a component.
+class Bacon extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value1: '',value2: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChange2 = this.handleChange2.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value1: event.target.value});
+  }
+  handleChange2(event) {
+    this.setState({value2: event.target.value});
+  }
+
+  handleSubmit(event) {
+    $.post("/login",{username:this.state.value1, password:this.state.value2},function(data)
+    {
+      window.location = data.redirect;
+    });
+    event.preventDefault();
+    return false;
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <h1>Login</h1>
+        <label>User name:</label><br/>
+        <input type="text" value={this.state.value1} onChange={this.handleChange} /><br/>
+        <label>User password:</label><br/>
+        <input type="password" value={this.state.value2} onChange={this.handleChange2} /><br/>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
+      ReactDOM.render(
+        React.createElement(Bacon, null),
+        document.getElementById('root')
+      );
+
+    </script>
+
+  </body>
+</html>  
+  
+  

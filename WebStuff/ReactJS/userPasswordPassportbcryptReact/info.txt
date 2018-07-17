@@ -1,0 +1,44 @@
+
+bring up command window and type
+>npm install
+
+The above will create node_modules and download the
+modules from package.json and put in node_modules
+folder.
+in command window anywhere type
+>mongod
+
+in command window of project type
+>npm start   (because of package.json has
+              "start": node app)
+     or
+>node app.js
+
+wait a while and the following should appear
+in window
+
+> learn-about-me@ ....
+> node app
+Server started on port 3000
+Mongoose: ....
+our own promise ....
+
+bring up browser and type in url
+localhost:3000
+
+
+Now you can see the web app.
+
+After you are done adding a user, you can
+see the database by doing the following.
+
+Bring up a command prompt and type
+>mongo
+>show dbs
+>use test
+>show collections
+>db.users.find()
+
+
+
+

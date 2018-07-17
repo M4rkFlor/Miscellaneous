@@ -1,0 +1,13 @@
+{
+  "name": "unitTesting",
+  "author": "Mr. Yee",
+  "private": true,
+  "version": "0.0.1",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}

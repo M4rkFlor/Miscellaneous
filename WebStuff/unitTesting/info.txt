@@ -1,0 +1,14 @@
+
+https://mochajs.org
+http://chaijs.com
+
+in command prompt type
+
+npm install --save mocha
+npm install --save chai
+
+in command prompt type
+npm test
+
+
+

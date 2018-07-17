@@ -1,0 +1,11 @@
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\bin\Debug\ServerTcpChat.exe.config
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\bin\Debug\ServerTcpChat.exe
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\bin\Debug\ServerTcpChat.pdb
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\obj\Debug\ServerTcpChat.csprojResolveAssemblyReference.cache
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\obj\Debug\ServerTcpChat.csproj.CoreCompileInputs.cache
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\obj\Debug\ServerTcpChat.exe
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\obj\Debug\ServerTcpChat.pdb
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\bin\Debug\ServerTcpChat.exe.manifest
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\bin\Debug\ServerTcpChat.application
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\obj\Debug\ServerTcpChat.exe.manifest
+C:\Users\Marco\source\repos\ServerTcpChat\ServerTcpChat\obj\Debug\ServerTcpChat.application

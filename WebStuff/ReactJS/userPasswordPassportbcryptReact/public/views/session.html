@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--   -->
+<html>
+  <head>
+    <title>Ajax</title>
+    <meta charset="utf-8"/>
+
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  </head>
+  
+  <body>  
+    <div id="root"></div>
+
+
+<!-- Below is using jsx -->
+    <script type="text/babel">
+
+//Create a component.
+class Bacon extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value1: '',value2: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLoad = this.handleLoad.bind(this);
+  }
+    
+    componentDidMount() {
+    window.addEventListener('load', this.handleLoad);
+ }
+
+ handleLoad() {
+  $.get("/userInfo",function(data){
+		if (data.username)
+			$("#session").html("Session " + data.username);
+	});
+ }
+    
+  handleChange(event) {
+    this.setState({value1: event.target.value});
+  }
+
+  handleSubmit(event) {
+      $.get("/logout",function(data){
+		window.location = data.redirect;
+	});
+     //remove eventDefault 
+    event.preventDefault();
+    return false;
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <h1 id="session">Session</h1>
+        <input type="submit" value="Logout" />
+      </form>
+    );
+  }
+}
+
+      ReactDOM.render(
+        React.createElement(Bacon, null),
+        document.getElementById('root')
+      );
+
+    </script>
+
+  </body>
+</html> 
+  
+  

@@ -1,0 +1,30 @@
+Using postman
+
+
+GET
+localhost:3000/people
+
+GET
+localhost:3000/people/123
+
+
+DELETE
+localhost:3000/people?ident=123
+
+POST
+locatlhost:3000/people
+
+select Body tab and choose
+
+x-www-form-urlencoded
+
+Key 123    Value Fred
+
+PUT
+locatlhost:3000/people
+
+select Body tab and choose
+
+x-www-form-urlencoded
+
+Key 123    Value Fred

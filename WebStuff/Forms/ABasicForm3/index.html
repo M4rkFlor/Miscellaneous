@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<!--
+	Shows use of forms.
+-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.1.min.js">
+
+
+</script>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+</style>
+
+<head>
+    <title>Second Forms Ex</title>
+</head>
+
+<body>
+    <h1>A Basic Form</h1>
+    <hr>
+    <form action="#">
+        <fieldset>
+            <legend>Student Information</legend>
+            <div>
+                <fieldset>
+                    <legend>General</legend>
+
+                    <label for="username">Name:</label>
+                    <input id="username" type="text" name="username" placeholder="name" value="val">
+
+                    <label for="birthdate">Birthdate:</label>
+                    <input id="birthdate" type="date" name="birthdate" value="2000-01-01">
+
+                    <label for="grade">Grade:</label>
+                    <input id="grade" type="number" name="grade" value="10" min="9" max="12">
+
+                </fieldset>
+
+            </div>
+            <fieldset>
+                <legend>Contact</legend>
+
+                <div>
+
+                    <label for="phone">Phone</label>
+                    <input id="phone" type="text" name="phone" value="800-123-4567">
+                    <br>
+                    <br>
+
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email">
+
+
+
+                </div>
+
+            </fieldset>
+            <fieldset>
+                <legend>Personal</legend>
+
+                <label for="residence">Residence</label>
+                <select id="residence" name="residence">
+							<option value="House">House</option>
+							<option value="Apartment">Apartment</option>
+							<option value="Cabin">Cabin</option>
+							<option value="Castle">Castle</option>
+						</select>
+                <br>
+                <label for="driver">Driver License</label>
+                <input type="checkbox" id="driver" name="driver" value="driver">
+
+                <br>
+                <div>
+                    Eating:
+                    <input type="radio" id="vegan" name="eating" value="vegan">
+                    <label for="vegan">Vegan</label>
+                    <input type="radio" id="vegetarian" name="eating" value="vegetarian">
+                    <label for="vegetarian">Vegetarian</label>
+                    <input type="radio" id="omnivore" name="eating" value="omnivore" checked="checked">
+                    <label for="omnivore">Omnivore</label>
+                    <input type="radio" id="carnivore" name="eating" value="carnivore">
+                    <label for="carnivore">Carnivore</label>
+                </div>
+            </fieldset>
+
+
+            <div for="message">Comments</div>
+            <textarea name="comments" rows="5" cols="20">
+						</textarea>
+            <br>
+
+            <input type="reset" name="reset" value="Clear Form">
+            <input type="submit" name="send" value="Send Form">
+        </fieldset>
+    </form>
+    <br>
+    <table id="theTable" border="1">
+        <thead>
+            <th>Name</th>
+            <th>Birthdate</th>
+            <th>Grade</th>
+            <th>Phone</th>
+            <th>E-mail</th>
+            <th>Residence</th>
+            <th>Driver License</th>
+            <th>Eating</th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+
+
+
+    <button onclick="clearTable()" id="calcButton">ClearTable</button>
+    <button onclick="fillForm()" id="calcButton">Fill Form</button>
+    <input type="text" id=formIndex>
+    <div id="madata">MYDATA</div>
+</body>
+<script type="text/javascript">
+    function clearTable() {
+        $("#theTable > tbody").empty();
+    }
+
+    function fillForm() {
+        //fill form with table data
+        if ($("formIndex").val() <= $("#theTable tr").length - 1) {
+            //get form row data from index
+            
+            //fillform
+        }
+    }
+    $(document).ready(
+        function() {
+            $("form").submit(
+                function(event) {
+
+                    let noERRORS = true;
+
+
+                    //NAME HANDLING
+                    if ($("#username").val() == "" || $("#username").val().trim() < 1) {
+                        noERRORS = false;
+                        alert("Name can't be blank or spaces");
+                    }
+                    $('td:first-child').each(function() {
+                        if ($(this).text() == $("#username").val()) {
+                            noERRORS = false;
+                            alert("That Name Already Exists");
+                        }
+                    });
+                    //
+                    //DATE HANDLING
+                    let myDate = new Date($("#birthdate").val());
+                    let Today = new Date();
+                    if (myDate > Today) {
+                        noERRORS = false;
+                        alert("That Date Has not occured");
+                    }
+                    //Cant be blank
+                    if ($("#email").val() == "") {
+                        noERRORS = false;
+                        alert("EMAIL can't be blank");
+                    }
+
+                    if ($("#grade").val() == "" || $("#grade").val().trim() < 1) {
+                        noERRORS = false;
+                        alert("Grade Cant be Blank");
+                    }
+                    //
+                    //CheckBox Handling
+                    if ($('#driver').is(":checked")) {
+                        console.log("HAS LISENCE");
+                    } else { //not checked
+                        console.log("dosent LISENCE");
+                    }
+                    //
+                    //Prints Your DATA
+                    $("#madata").text("My Data has Changed to :" + $("#username").val() + " " + $("#email").val() + " " + $('input[name=eating]:checked').val() + " " + $("#birthdate").val() + " " + $("#grade").val() + " " + $("#phone").val() + " " + $("#residence").val());
+                    //
+
+
+
+
+
+                    if (noERRORS) {
+                        //Sends DATA TO FORM
+                        $("#theTable").append("<tr><td>" + $("#username").val() + "</td>" +
+                            "<td>" + $("#birthdate").val() + "</td>" +
+                            "<td>" + $("#grade").val() + "</td>" +
+                            "<td>" + $("#phone").val() + "</td>" +
+                            "<td>" + $("#email").val() + "</td>" +
+                            "<td>" + $("#residence").val() + "</td>" +
+                            "<td>" + $('#driver').is(":checked") + "</td>" +
+                            "<td>" + $('input[name=eating]:checked').val() + "</td></tr>");
+                    }
+
+
+                    return false;
+                }
+            );
+        }
+    );
+
+</script>
+
+</html>

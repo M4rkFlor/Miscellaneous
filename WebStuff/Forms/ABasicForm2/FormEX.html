@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<!--MARCO FLORES-->
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.1.min.js">
+
+
+</script>
+<style>
+    form input[type=submit] {
+        background: url("kingkong.gif") no-repeat center center;
+        width: 202px;
+        height: 249px;
+        border: 5px solid #000;
+        color: transparent;
+        font-size: 0
+    }
+
+</style>
+
+<head>
+    <title>Second Forms Ex</title>
+</head>
+
+<body>
+    <h1>Objects</h1>
+    <hr>
+    <form action="#">
+        <fieldset>
+            <legend>Object Information</legend>
+            <div>
+
+                <label for="object">Object:</label>
+                <input id="object" type="text" name="object" placeholder="object">
+
+                <label for="color">Color:</label>
+                <input id="color" type="color" name="color">
+
+
+
+                <label for="rating">Rating:</label>
+                <input id="rating" type="number" name="rating" value="5" min="0" max="10">
+                <input type="range" min="0" max="10" step="1" id="slider">
+
+
+
+
+
+                <input type="submit" name="send" value="Send Form" class="myButton">
+            </div>
+
+
+
+        </fieldset>
+    </form>
+    <br>
+    <table id="theTable" border="1">
+        <thead>
+            <th>Object</th>
+            <th>Color</th>
+            <th>Rating</th>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</body>
+<script type="text/javascript">
+    //  $("#rating").val() = $("#slider").val();
+    var range = document.getElementById('slider');
+    var field = document.getElementById('rating');
+
+    range.addEventListener('input', function(e) {
+        field.value = e.target.value;
+    });
+    field.addEventListener('input', function(e) {
+        range.value = e.target.value;
+    });
+
+    $(document).ready(
+        function() {
+            $("form").submit(
+                function(event) {
+                    let noERRORS = true;
+
+                    if ($("#object").val() == "" || $("#object").val().trim() < 1) {
+                        noERRORS = false;
+                        alert("Name can't be blank or spaces");
+                    }
+                    $('td:first-child').each(function() {
+                        if ($(this).text() == $("#object").val()) {
+                            noERRORS = false;
+                            alert("That Name Already Exists");
+                        }
+                    });
+
+
+
+                    let r = parseInt($("#color").val().substr(1, 2), 16);
+                    let g = parseInt($("#color").val().substr(3, 4), 16);
+                    let b = parseInt($("#color").val().substr(5, 6), 16);
+                    console.log("my colors are :" + r + " " + g + " " + b);
+                    let mycolor = "none";
+                    if (r == 0 && g == 0 && b == 0) {
+                        mycolor = "black";
+                    }
+                    if (r == 255 && g == 65535 && b == 255) {
+                        mycolor = "white";
+                    }
+                    if (r == g == b) {
+                        mycolor = "grey";
+                    }
+                    if (r > g && r > b) {
+                        mycolor = "red";
+                    }
+                    if (r > g && r > b) {
+                        mycolor = "red";
+                    }
+                    if (b > g && b > r) {
+                        mycolor = "blue";
+                    }
+
+
+                    if (noERRORS) {
+                        //Sends DATA TO FORM
+                        $("#theTable").append("<tr><td>" + $("#object").val() + "</td>" +
+                            "<td>" + mycolor + "</td>" +
+                            "<td>" + $("#rating").val() + "</td>" +
+                            "</td></tr>");
+                    }
+
+
+                    return false;
+                }
+            );
+        }
+    );
+
+</script>
+
+</html>

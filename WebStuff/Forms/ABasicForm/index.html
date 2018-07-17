@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html>
+<!--
+	Shows use of forms.
+-->
+	<head>
+		<title>Second Forms Ex</title>
+	</head>
+	<body>
+		<h1>A Basic Form</h1>
+		<hr>
+			<form action="#">
+				<fieldset>
+					<legend>Form Information</legend>
+					<div>
+						<label for="username">Name:</label>
+						<input id="username" type="text" name="username" placeholder ="name">
+
+						<label for="state">State:</label>
+						<select id="state" name="state">
+							<option value="RI">Rhode Island</option>
+							<option selected="selected" value="CA">California</option>
+							<option value="HI">Hawaii</option>
+						</select>
+					</div>
+					<legend>Pizza Information</legend>
+
+					<div>Toppings:
+						<br>
+						<label for="cheese">Cheese</label>
+						<input type="checkbox" id="cheese" name="toppings" value="cheese">
+						<br>
+						<input type="checkbox" id="tomato" name="toppings" value="tomato">
+						<label for="tomato">Tomato</label>
+
+						<br>
+                                <div>Meat:
+						<br>
+<input type="radio" id="ham" name="meat" value="ham">
+<label for="ham">Ham</label>
+                                <br>
+<input type="radio" id="sausage" name="meat" value="sausage">
+<label for="sausage">Sausage</label>
+                                <br>
+<input type="radio" checked="checked" id="nomeat" name="meat" value="nomeat">
+<label for="nomeat">No Meat</label>
+                                </div>
+					
+
+					</div>
+
+						<input type="reset" name="reset" value="Clear Form">						
+						<input type="submit" name="send" value="Send Form">						
+
+
+				</fieldset>
+			</form>
+	</body>
+</html>
+
+
+
+

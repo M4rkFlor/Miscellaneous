@@ -1,0 +1,12 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "an example",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.6.5",
+    "express": "5.0.0-alpha.2"
+  },
+  "author": "me",
+  "license": "ISC"
+}
