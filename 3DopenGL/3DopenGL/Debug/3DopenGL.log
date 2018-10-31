@@ -1,0 +1,18 @@
+﻿Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::String::String(char const *,class std::locale const &)" (__imp_??0String@sf@@QAE@PBDABVlocale@std@@@Z) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::String::~String(void)" (__imp_??1String@sf@@QAE@XZ) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::VideoMode::VideoMode(unsigned int,unsigned int,unsigned int)" (__imp_??0VideoMode@sf@@QAE@III@Z) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __thiscall sf::Window::close(void)" (__imp_?close@Window@sf@@QAEXXZ) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: bool __thiscall sf::Window::isOpen(void)const " (__imp_?isOpen@Window@sf@@QBE_NXZ) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: bool __thiscall sf::Window::pollEvent(class sf::Event &)" (__imp_?pollEvent@Window@sf@@QAE_NAAVEvent@2@@Z) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __thiscall sf::Window::display(void)" (__imp_?display@Window@sf@@QAEXXZ) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall sf::RenderWindow::RenderWindow(class sf::VideoMode,class sf::String const &,unsigned int,struct sf::ContextSettings const &)" (__imp_??0RenderWindow@sf@@QAE@VVideoMode@1@ABVString@1@IABUContextSettings@1@@Z) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall sf::RenderWindow::~RenderWindow(void)" (__imp_??1RenderWindow@sf@@UAE@XZ) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual bool __thiscall sf::RenderWindow::setActive(bool)" (__imp_?setActive@RenderWindow@sf@@UAE_N_N@Z) referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol __imp__glewInit@0 referenced in function _main
+Main.obj : error LNK2019: unresolved external symbol __imp__glewGetErrorString@4 referenced in function _main
+Main.obj : error LNK2001: unresolved external symbol __imp__glewExperimental
+C:\Users\Marco\Desktop\OpenGLlibs\glew-2.1.0\lib\Release\x64\glew32.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Marco\Desktop\OpenGLlibs\SFML-2.5.0\lib\sfml-graphics.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Marco\Desktop\OpenGLlibs\SFML-2.5.0\lib\sfml-window.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Marco\Desktop\OpenGLlibs\SFML-2.5.0\lib\sfml-system.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+C:\Users\Marco\source\repos\3DopenGL\Debug\3DopenGL.exe : fatal error LNK1120: 13 unresolved externals

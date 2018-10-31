@@ -1,0 +1,30 @@
+const char* vertexShaderCode =
+"#version 430\r\n"
+""
+"in layout(location=0) vec3 position;"
+"in layout(location=1) vec3 vertexColor;"
+"in layout(location=2) mat4 fullTransform;"
+//"uniform vec3 mainColor;"
+//"uniform float yFlip;"
+"uniform mat4 TransformMatrix;"
+"out vec3 fragColor;"
+"void main()"
+""
+"{"
+"vec4 v = vec4(position,1.0f);"
+""
+"gl_Position = fullTransform * v;"
+//"gl_Position.y *= yFlip;"
+"fragColor = vertexColor;"
+"}";
+
+const char* fragmentShaderCode =
+"#version 430\r\n"
+""
+"out vec4 myColor;"
+"in vec3 fragColor;"
+"void main()"
+""
+"{"
+"myColor = vec4(fragColor,0.5);"
+"}";
