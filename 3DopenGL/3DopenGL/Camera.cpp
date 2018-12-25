@@ -18,17 +18,21 @@ void Camera::mouseUpdate(const glm::vec2 &newMousePos) {
 	/*viewDirection = glm::mat3(glm::rotate(glm::radians(deltaMouse.y * mouseSens), glm::vec3(1.0f, 0.0f, 0.0f))) * 
 					glm::mat3(glm::rotate(glm::radians(deltaMouse.x * mouseSens), UP)) * viewDirection;
 	*/
-	//camera does 180 when looking up need to fix down
-			oldViewDirection = viewDirection;//save a valid position to revert to
-			//only rotate if valid not working yet
-			viewDirection = glm::mat3(glm::rotate(glm::radians(deltaMouse.x * mouseSens), UP) *
-				glm::rotate(glm::radians(deltaMouse.y * mouseSens), rotateAround)) *
+			
+			//oldViewDirection = viewDirection;//save a valid position to revert to//not needed
+			//camera does 180 when looking up or down
+			float dontRotate = 1.0f;
+			glm::vec3 tempYrot = glm::mat3(glm::rotate(glm::radians(deltaMouse.y * mouseSens), rotateAround))*viewDirection;
+			//only rotate if valid
+			if (tempYrot.y > 0.999f || tempYrot.y < -0.999f){
+				dontRotate = 0.0f;
+			}
+
+			viewDirection = glm::mat3(glm::rotate(glm::radians(deltaMouse.y * mouseSens * dontRotate), rotateAround)*
+				glm::rotate(glm::radians(deltaMouse.x * mouseSens), UP) 
+				) *
 				viewDirection;
-		//clamp the x rotation
-		if (viewDirection.y > 0.999f) {
-			viewDirection = oldViewDirection;
-			viewDirection.y = 0.999f;
-		}
+
 }
 
 void Camera::setMouseOrigin(const glm::vec2 &windowSize)
