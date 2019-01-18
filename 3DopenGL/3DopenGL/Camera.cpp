@@ -8,6 +8,11 @@ Camera::Camera():
 {
 }
 
+glm::vec3 Camera::getPosition() const
+{
+	return position;
+}
+
 glm::mat4  Camera::getModelToWorldMatrix() const {
 	return glm::lookAt(position,position + viewDirection,UP);
 }

@@ -11,6 +11,7 @@ class Camera
 	const glm::vec3 UP;
 public:
 	Camera();
+	glm::vec3 getPosition() const;
 	glm::mat4 getModelToWorldMatrix() const;
 	void mouseUpdate(const glm::vec2 &newMousePos);
 	void setMouseOrigin(const glm::vec2 &windowSize);

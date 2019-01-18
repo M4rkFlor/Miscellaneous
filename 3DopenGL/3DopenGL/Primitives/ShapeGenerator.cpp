@@ -37,63 +37,88 @@ ShapeData ShapeGenerator::makeTriangle() {
 }
 
 ShapeData ShapeGenerator::makeCube() {
-	ShapeData ret;
+	ShapeData ret;//the returned shape
 	Vertex stackVerts[] = {
-		vec3(-1.0f, +1.0f, +1.0f), // 0
+		// Normal cross( v1(First - second) , v2(third - second) )
+		vec3(-1.0f, +1.0f, +1.0f), // 0 //tested
 		vec3(+1.0f, +0.0f, +0.0f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, +1.0f) - vec3(+1.0f, +1.0f, +1.0f)), (vec3(+1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, +1.0f)))),// Normal cross( v1(First - second) , v2(third - second) ) //swap v1 and v2 to flip N direction.
 		vec3(+1.0f, +1.0f, +1.0f), // 1
 		vec3(+0.0f, +1.0f, +0.0f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, +1.0f) - vec3(+1.0f, +1.0f, +1.0f)), (vec3(+1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, +1.0f)))),// Normal
 		vec3(+1.0f, +1.0f, -1.0f), // 2
 		vec3(+0.0f, +0.0f, +1.0f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, +1.0f) - vec3(+1.0f, +1.0f, +1.0f)), (vec3(+1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, +1.0f)))),// Normal
 		vec3(-1.0f, +1.0f, -1.0f), // 3
 		vec3(+1.0f, +1.0f, +1.0f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, +1.0f) - vec3(+1.0f, +1.0f, +1.0f)), (vec3(+1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, +1.0f)))),// Normal
 
-		vec3(-1.0f, +1.0f, -1.0f), // 4
+		vec3(-1.0f, +1.0f, -1.0f), // 4 //tested
 		vec3(+1.0f, +0.0f, +1.0f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, -1.0f)), (vec3(+1.0f, -1.0f, -1.0f) - vec3(+1.0f, +1.0f, -1.0f)))),// Normal
 		vec3(+1.0f, +1.0f, -1.0f), // 5
 		vec3(+0.0f, +0.5f, +0.2f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, -1.0f)), (vec3(+1.0f, -1.0f, -1.0f) - vec3(+1.0f, +1.0f, -1.0f)))),// Normal
 		vec3(+1.0f, -1.0f, -1.0f), // 6
 		vec3(+0.8f, +0.6f, +0.4f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, -1.0f)), (vec3(+1.0f, -1.0f, -1.0f) - vec3(+1.0f, +1.0f, -1.0f)))),// Normal
 		vec3(-1.0f, -1.0f, -1.0f), // 7
 		vec3(+0.3f, +1.0f, +0.5f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, -1.0f)), (vec3(+1.0f, -1.0f, -1.0f) - vec3(+1.0f, +1.0f, -1.0f)))),// Normal
 
-		vec3(+1.0f, +1.0f, -1.0f), // 8
+		vec3(+1.0f, +1.0f, -1.0f), // 8 //tested
 		vec3(+0.2f, +0.5f, +0.2f), // Color
+		glm::normalize(glm::cross((vec3(+1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, +1.0f)), (vec3(+1.0f, -1.0f, +1.0f) - vec3(+1.0f, +1.0f, +1.0f)))),// Normal
 		vec3(+1.0f, +1.0f, +1.0f), // 9
 		vec3(+0.9f, +0.3f, +0.7f), // Color
+		glm::normalize(glm::cross((vec3(+1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, +1.0f)), (vec3(+1.0f, -1.0f, +1.0f) - vec3(+1.0f, +1.0f, +1.0f)))),// Normal
 		vec3(+1.0f, -1.0f, +1.0f), // 10
 		vec3(+0.3f, +0.7f, +0.5f), // Color
+		glm::normalize(glm::cross((vec3(+1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, +1.0f)), (vec3(+1.0f, -1.0f, +1.0f) - vec3(+1.0f, +1.0f, +1.0f)))),// Normal
 		vec3(+1.0f, -1.0f, -1.0f), // 11
 		vec3(+0.5f, +0.7f, +0.5f), // Color
+		glm::normalize(glm::cross((vec3(+1.0f, +1.0f, -1.0f) - vec3(+1.0f, +1.0f, +1.0f)), (vec3(+1.0f, -1.0f, +1.0f) - vec3(+1.0f, +1.0f, +1.0f)))),// Normal
 
-		vec3(-1.0f, +1.0f, +1.0f), // 12
+
+		vec3(-1.0f, +1.0f, +1.0f), // 12 //tested
 		vec3(+0.7f, +0.8f, +0.2f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, +1.0f) - vec3(-1.0f, +1.0f, -1.0f)), (vec3(-1.0f, -1.0f, -1.0f) - vec3(-1.0f, +1.0f, -1.0f)))),// Normal
 		vec3(-1.0f, +1.0f, -1.0f), // 13
 		vec3(+0.5f, +0.7f, +0.3f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, +1.0f) - vec3(-1.0f, +1.0f, -1.0f)), (vec3(-1.0f, -1.0f, -1.0f) - vec3(-1.0f, +1.0f, -1.0f)))),// Normal
 		vec3(-1.0f, -1.0f, -1.0f), // 14
 		vec3(+0.4f, +0.7f, +0.7f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, +1.0f) - vec3(-1.0f, +1.0f, -1.0f)), (vec3(-1.0f, -1.0f, -1.0f) - vec3(-1.0f, +1.0f, -1.0f)))),// Normal
 		vec3(-1.0f, -1.0f, +1.0f), // 15
 		vec3(+0.2f, +0.5f, +1.0f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, +1.0f, +1.0f) - vec3(-1.0f, +1.0f, -1.0f)), (vec3(-1.0f, -1.0f, -1.0f) - vec3(-1.0f, +1.0f, -1.0f)))),// Normal
 
-		vec3(+1.0f, +1.0f, +1.0f), // 16
+		vec3(+1.0f, +1.0f, +1.0f), // 16 //tested
 		vec3(+0.6f, +1.0f, +0.7f), // Color
+		glm::normalize(glm::cross((vec3(+1.0f, +1.0f, +1.0f) - vec3(-1.0f, +1.0f, +1.0f)), (vec3(-1.0f, -1.0f, +1.0f) - vec3(-1.0f, +1.0f, +1.0f)))),// Normal
 		vec3(-1.0f, +1.0f, +1.0f), // 17
 		vec3(+0.6f, +0.4f, +0.8f), // Color
+		glm::normalize(glm::cross((vec3(+1.0f, +1.0f, +1.0f) - vec3(-1.0f, +1.0f, +1.0f)), (vec3(-1.0f, -1.0f, +1.0f) - vec3(-1.0f, +1.0f, +1.0f)))),// Normal
 		vec3(-1.0f, -1.0f, +1.0f), // 18
 		vec3(+0.2f, +0.8f, +0.7f), // Color
+		glm::normalize(glm::cross((vec3(+1.0f, +1.0f, +1.0f) - vec3(-1.0f, +1.0f, +1.0f)), (vec3(-1.0f, -1.0f, +1.0f) - vec3(-1.0f, +1.0f, +1.0f)))),// Normal
 		vec3(+1.0f, -1.0f, +1.0f), // 19
 		vec3(+0.2f, +0.7f, +1.0f), // Color
+		glm::normalize(glm::cross((vec3(+1.0f, +1.0f, +1.0f) - vec3(-1.0f, +1.0f, +1.0f)), (vec3(-1.0f, -1.0f, +1.0f) - vec3(-1.0f, +1.0f, +1.0f)))),// Normal
 
-		vec3(+1.0f, -1.0f, -1.0f), // 20
-		vec3(+0.8f, +0.3f, +0.7f), // Color
+		vec3(+1.0f, -1.0f, -1.0f), // 20 //normal  fliped
+		vec3(+0.8f, +0.3f, +0.7f), // Color 
+		glm::normalize(glm::cross((vec3(-1.0f, -1.0f, +1.0f) - vec3(-1.0f, -1.0f, -1.0f)),(vec3(+1.0f, -1.0f, -1.0f) - vec3(-1.0f, -1.0f, -1.0f)))),// Normal
 		vec3(-1.0f, -1.0f, -1.0f), // 21
 		vec3(+0.8f, +0.9f, +0.5f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, -1.0f, +1.0f) - vec3(-1.0f, -1.0f, -1.0f)),(vec3(+1.0f, -1.0f, -1.0f) - vec3(-1.0f, -1.0f, -1.0f)))),// Normal
 		vec3(-1.0f, -1.0f, +1.0f), // 22
 		vec3(+0.5f, +0.8f, +0.5f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, -1.0f, +1.0f) - vec3(-1.0f, -1.0f, -1.0f)),(vec3(+1.0f, -1.0f, -1.0f) - vec3(-1.0f, -1.0f, -1.0f)))),// Normal
 		vec3(+1.0f, -1.0f, +1.0f), // 23
 		vec3(+0.9f, +1.0f, +0.2f), // Color
+		glm::normalize(glm::cross((vec3(-1.0f, -1.0f, +1.0f) - vec3(-1.0f, -1.0f, -1.0f)),(vec3(+1.0f, -1.0f, -1.0f) - vec3(-1.0f, -1.0f, -1.0f)))),// Normal
 	};
-
 	ret.numVertices = NUM_ARRAY_ELEMENTS(stackVerts);
 	ret.vertices = new Vertex[ret.numVertices];
 	memcpy(ret.vertices, stackVerts, sizeof(stackVerts));

@@ -7,6 +7,7 @@ struct ShapeData {
 
 	Vertex* vertices;
 	GLuint numVertices;
+	//An array of indices that choose the order to read vertices Data
 	GLushort* indices;
 	GLuint numIndices;
 	GLsizeiptr vertexBufferSize() const

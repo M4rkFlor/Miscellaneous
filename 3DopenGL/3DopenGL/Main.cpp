@@ -6,7 +6,7 @@
 #include <Primitives\Vertex.h>
 #include <Primitives\ShapeGenerator.h>
 #include "Camera.h"
-//maybe need shape data
+//#include "assimp\Importer.hpp"
 using namespace std;
 using glm::vec3;
 using glm::mat4;
@@ -47,10 +47,12 @@ void sendDataToOpeGl(){
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
 	glBufferData(GL_ARRAY_BUFFER, shape.vertexBufferSize(), shape.vertices, GL_STATIC_DRAW);
 	glEnableVertexAttribArray(0);//AttribArray uses currently bound vertex array object, glEnableVertexArrayAttrib updates state of the vertex array object with ID vaobj.
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 9, 0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (char*)(sizeof(float) * 3));
-
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (char*)(sizeof(float) * 3));
+	//normal attrib
+	glEnableVertexAttribArray(6);
+	glVertexAttribPointer(6, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (char*)(sizeof(float) * 6));
 
 	//GLushort indices[] = { 0,1,2,3,4,5 };
 	GLuint indexBufferID;
@@ -86,7 +88,7 @@ void draw() {
 	cycleIndex += 1;
 	if (cycleIndex % 60 == 0) { cycleIndex = 0; floatcycleIndex += 1; if (floatcycleIndex >= 360) { floatcycleIndex = 0; } }
 
-	mat4 ProjectionTransformMatrix = glm::perspective(glm::radians(90.0f), ((GLfloat)windowX) / windowY, 1.0f, 300.0f);
+	mat4 ProjectionTransformMatrix = glm::perspective(glm::radians(90.0f), ((GLfloat)windowX) / windowY, 0.01f, 300.0f);
 	mat4 TranslateTransformMatrix = glm::translate(ProjectionTransformMatrix, vec3(-4.0f, 2.0f, -6.0f));
 	mat4 TransformMatrix = glm::rotate(TranslateTransformMatrix, glm::radians(floatcycleIndex), vec3(-1.0f, -1.0f, 0.0f));
 	GLint TransformMatrixLocation = glGetUniformLocation(programID, "TransformMatrix");
@@ -121,16 +123,32 @@ void drawInstanced() {
 	mat4 ProjectionTransformMatrix = glm::perspective(glm::radians(60.0f), ((GLfloat)windowX) / windowY, 1.0f, 100.0f);
 	mat4 cameraMatrix = ProjectionTransformMatrix*camera.getModelToWorldMatrix();
 	//cube 1
-	mat4 TranslateTransformMatrix = glm::translate(cameraMatrix, vec3(-4.0f, 2.0f, -6.0f));
-	mat4 TransformMatrix = glm::rotate(TranslateTransformMatrix, glm::radians(floatcycleIndex+30.0f), vec3(-1.0f, -1.0f, 0.0f));
+	//mat4 ModleWorldTransform = glm::translate(glm::mat4(), vec3(-1.0f, -1.0f, 0.0f));
+	mat4 TranslateTransformMatrix = glm::translate(cameraMatrix, vec3(-1.0f, 0.0f, -4.0f));
+	mat4 TransformMatrix = glm::rotate(TranslateTransformMatrix, glm::radians(floatcycleIndex+0.0f), vec3(-1.0f, -1.0f, 0.0f));
 	//cube 2
-	mat4 TranslateTransformMatrix2 = glm::translate(cameraMatrix, vec3(3.0f, 2.0f, -6.0));
-	mat4 TransformMatrix2 = glm::rotate(TranslateTransformMatrix2, glm::radians(floatcycleIndex+60.0f), vec3(0.0f, 1.0f, 1.0f));
+	mat4 TranslateTransformMatrix2 = glm::translate(cameraMatrix, vec3(3.0f, 0.0f, -6.0));
+	mat4 TransformMatrix2 = glm::rotate(TranslateTransformMatrix2, glm::radians(floatcycleIndex+0.0f), vec3(0.0f, 1.0f, 1.0f));
 
 	mat4 TransForms[] = {
 		TransformMatrix,TransformMatrix2
 	};
-
+	//ambientLight
+	vec3 ambientLight(0.2f, 0.2f, 0.2f);
+	GLint ambientLightLocation = glGetUniformLocation(programID, "ambientLight");
+	glUniform3fv(ambientLightLocation, 1, &ambientLight[0]);
+	//difused Light
+	vec3 lightPosition(1.0f, 1.0f, 1.0f);
+	GLint lightPositionLocation = glGetUniformLocation(programID, "lightPosition");
+	glUniform3fv(lightPositionLocation, 1, &lightPosition[0]);
+	//Specular Light
+	vec3 cameraPos(camera.getPosition());
+	GLint cameraPositionLocation = glGetUniformLocation(programID, "cameraEyePosition");
+	glUniform3fv(cameraPositionLocation, 1, &cameraPos[0]);
+	//send ModelToWorldTransformMatrix uniform
+	mat4 modelToWorld(ProjectionTransformMatrix);
+	GLint modelToWorldLocation = glGetUniformLocation(programID, "ModelToWorldTransformMatrix");
+	glUniformMatrix4fv(modelToWorldLocation, 1, GL_FALSE, &modelToWorld[0][0]);
 	//Send GL BUFFERS
 	glBufferData(GL_ARRAY_BUFFER, sizeof(TransForms), TransForms, GL_DYNAMIC_DRAW);
 	//
@@ -167,7 +185,7 @@ void installShaders() {
 	GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
-	const char* adapter[1];
+	const char* adapter[1];//an array of pointers to strings containing the source code to be loaded into the shader.
 	adapter[0] = vertexShaderCode;
 	glShaderSource(vertexShaderID,1,adapter,0);
 	adapter[0] = fragmentShaderCode;
@@ -205,7 +223,9 @@ void installShaders() {
 	GLint yFlipLocation = glGetUniformLocation(programID, "yFlip");
 	glUniform1f(yFlipLocation, -1.0f);
 	*/
-}
+	
+	
+} 
 int main() {
 
 #pragma region WindowGLEWSetup
@@ -228,7 +248,8 @@ int main() {
 #pragma endregion WindowGLEWSetup 
 	// load resources, initialize the OpenGL states, ...
 	glEnable(GL_DEPTH_TEST);
-	installShaders();
+	//glEnable(GL_CULL_FACE);//only render the normals side of triangles
+	installShaders();//VertextShader and FragmentShader from ShaderSoure.cpp
 	sendDataToOpeGl();
 	bool running = true;
 	cycleIndex = 0;
