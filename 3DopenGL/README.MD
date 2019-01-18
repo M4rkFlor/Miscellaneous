@@ -4,7 +4,7 @@ I'm learning 3D graphics using OpenGL(3.3)+GLEW+SFML.
 Shaders, instanced rendering, Model-View-Projection Matrix, Movement control, Animimation, Lighting (ambient + diffuse + specular with light attenuation).
 ## Screenshots
 ![alt text](https://github.com/M4rkFlor/Miscellaneous/blob/master/3DopenGL/3DopenGL/PictureNoLighting.png)
-![alt text](https://github.com/M4rkFlor/Miscellaneous/blob/master/3DopenGL/3DopenGL/Picture.png)
+![alt text](https://github.com/M4rkFlor/Miscellaneous/blob/master/3DopenGL/3DopenGL/PictureLighting.png)
 ## Download
 download all the items in the x64/Debug and put them in a folder and you should be able to run it as long as you have a x64 system.
 ## Controls
