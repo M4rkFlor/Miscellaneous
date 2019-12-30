@@ -1,0 +1,38 @@
+//Compile NASM//
+Compile: > nasm easyOS.asm -f bin -o boot_sect.bin // compile file easyOS.asm, use format binary, output file boot_sect.bin
+Run: > Bocsh.exe to run boot_sect.bin, load config.bxrc
+///
+///
+///
+//Compile single .c file
+$gcc -ffreestanding -c kernel.c -o kernel.o //creates object file -Wl can pass args to linker instead of calling ld
+$ld -o kernel.bin -Ttext 0x1000 kernel.o --oformat binary // tell linker(ld) to turn object file into binary
+// -Ttext=org in hex , can see list of avalible outputs with objdump -i
+// ld using MinGW won't work, PE error, so...
+
+//Alternate solution is to not use MinGW or to use a Linker.ld script. // data sections cant be anlyzed as bin but can be as exe 
+gcc -Wall -pedantic-errors -ffreestanding -c kernel.c -o kernel.exe -nostdlib -Wl,-Ttext=0x1000,-nostdlib
+objcopy -O binary -j .text kernel.exe kernel.bin
+
+// Examine .exe files
+objdump -f kernel.exe
+
+//Examine .bin in asm with
+ndisasm -b 32 kernel.bin
+
+//Size
+size kernel.exe //shows where data is in each section
+size kernel.bin --target=binary
+
+// MinGW
+// This recipe is in MakeFile use in MinGW with make32
+make32 clean // removes all compiled files except the .img
+nasm kernel_entry.asm -f elf -o kernel_entry.o                              // kernel_entry.o
+gcc -Wall -pedantic-errors -ffreestanding -c kernel.c -o kernel.o -nostdlib // kernel.o
+nasm daMain_boot_secctor(10).asm -f bin -o bootsect.bin                     // bootsect.bin
+ld -T NUL -o kernel.tmp -Ttext 0x1000 -nostdlib kernel_entry.o kernel.o     // kernel_entry.o + kernel.o = kernel.tmp
+objcopy -O binary -j .text kernel.tmp kernel.bin                            // kernel.tmp -> kernel.bin
+copy /b bootsect.bin+kernel.bin os-image                                    // bootsect.bin + kernel.bin = os-image.bin 
+
+
+cd C:\Users\Marco\Desktop\easyOS
